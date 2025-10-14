@@ -63,6 +63,25 @@ function App() {
     window.location.reload()
   }
 
+  function beginEdition(editableID: number) {
+    const saved = localStorage.getItem("notesList")
+    const noteArray = JSON.parse(saved as string) as Array<Note>
+
+    if(noteArray[editableID].active == true) {
+
+      if(name != undefined || null || "") {
+        noteArray[editableID].name = name as string
+      }
+
+      if(content != undefined || null || "") {
+        noteArray[editableID].content = content as string
+      }
+    }
+
+    localStorage.setItem("notesList", JSON.stringify(noteArray))
+    window.location.reload()
+  }
+
   function deactivitinator(disablableID: number) {
     const saved = localStorage.getItem("notesList")
     const noteArray = JSON.parse(saved as string) as Array<Note>
@@ -99,6 +118,7 @@ function App() {
           submit :3c
         </button>
       </div>
+      use Submit to create new, use Edit to overwrite filled fields
 
       <br />
 
@@ -108,7 +128,7 @@ function App() {
           <div>
             <hr />
             <div key={index}>
-              {notes.name} <a onClick={() => deactivitinator(index)}>toggle</a>
+              {notes.name} | <a onClick={() => deactivitinator(index)}>toggle</a> | <a onClick={() => beginEdition(index)}>edit</a> |
               <hr />
               <br />
               <div>{notes.content}</div>
