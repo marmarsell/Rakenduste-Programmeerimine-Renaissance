@@ -1,4 +1,4 @@
-//import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -9,6 +9,13 @@ function App() {
     v2: string,
     v3: string
   }
+
+  const [cardList, setCardList] = useState<Array<Flashcard>>()
+
+  useEffect(() => {
+    const saved = localStorage.getItem("flashcard")
+    setCardList(JSON.parse(saved as string) as Array<Flashcard>)
+  }, [])
 
   //localstorage initialisation
   if(!localStorage.getItem("flashcard")) {
@@ -33,6 +40,8 @@ function App() {
     tempFlashcardStorage.push(testFlashcard)
     localStorage.setItem("flashcard", JSON.stringify(tempFlashcardStorage))
 
+    window.location.reload()
+
     console.log(tempFlashcardStorage)
   }
 
@@ -40,6 +49,17 @@ function App() {
     <>
       <div>
         <div>flashcardddd <button onClick={() => thyCardCreateth()}>wawaa</button></div>
+        <div>
+          <div>------------------------------------------------------------</div>
+          <hr />
+          {cardList?.map((element, index) =>
+            <div key={index}>
+              <div>{element.que}</div>
+              <div>{element.v1} {element.v2} {element.v3}</div>
+              <hr />
+            </div>
+          )}
+        </div>
       </div>
     </>
   )
