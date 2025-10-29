@@ -4,13 +4,15 @@ import './App.css'
 
 import FCMaker from './components/FCMaker.tsx'
 import NotFound from './components/NotFound.tsx'
+import Home from './components/Home.tsx'
 
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path="maker" element={<FCMaker/>}/>
+        <Route path="flashcards/home" element={<Home/>}/>
+        <Route path="flashcards/editor" element={<FCMaker/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>

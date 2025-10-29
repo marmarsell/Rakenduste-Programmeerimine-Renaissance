@@ -45,10 +45,14 @@ function FCMaker() {
     console.log(tempFlashcardStorage)
   }
 
+    function pressHome() {
+        window.location.replace("/flashcards/home");
+    }
+
   return (
     <>
       <div>
-        <div>flashcardddd <button onClick={() => thyCardCreateth()}>wawaa</button></div>
+        <div><button onClick={() => pressHome()}>Home ⌂</button> go back home | new flashcard <button onClick={() => thyCardCreateth()}>new ✎</button></div>
         <div>
           <div>------------------------------------------------------------</div>
           <hr />
