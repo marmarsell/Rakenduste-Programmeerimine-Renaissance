@@ -8,7 +8,11 @@ function FCGame() {
         ans: string
     }
 
+    // game variables
     const [updates, setUpdates] = useState(0)
+    const saved = localStorage.getItem("flashcard")
+    const courseLength = (JSON.parse(saved as string) as Array<Flashcard>).length
+    const [goodBois, setGoodBois] = useState(0)
 
     //flashcards initialisation
     const savedFlashcards = localStorage.getItem("flashcard");
@@ -20,6 +24,14 @@ function FCGame() {
         remainingCards.splice(0, 1)
         setUpdates(updates + 1)
         console.log(remainingCards)
+        // Check the answer
+        const answer = (document.getElementById("answer") as unknown as HTMLInputElement).value as unknown as string
+        console.log("comparing: " + answer + " vs " + remainingCards[0].ans)
+        if(answer == remainingCards[0].ans) {
+            setGoodBois(goodBois + 1)
+        }
+
+        // check if game ended
     }
 
     useEffect(() => {
@@ -29,10 +41,15 @@ function FCGame() {
     return(
         <>
             <div>{remainingCards.length} questions left</div>
+            <div>{goodBois}/{courseLength} correct</div>
             <div>
-                {/* <button onClick={() => arrayShuffle()}>shuffle</button> */}
-                {remainingCards[0].que}
-                <button onClick={() => submitAnswer()}></button>
+                <hr />
+                <h3>{remainingCards[0].que}</h3>
+                <hr />
+                <input type="text" id="answer" placeholder="your answer" />
+                <div>
+                    <button onClick={() => submitAnswer()}></button>
+                </div>
             </div>
         </>
     )
