@@ -106,7 +106,6 @@ function FCMaker() {
           <div>
             <input type="text" id='question' placeholder='Question'/> <input type="text" id='answer' placeholder='Answer'/>
           </div>
-          <div>------------------------------------------------------------</div>
           <hr />
           {cardList?.map((element, index) =>
             <div key={index}>
