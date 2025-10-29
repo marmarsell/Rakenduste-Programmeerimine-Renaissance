@@ -19,23 +19,26 @@ function FCGame() {
     const [remainingCards, setRemainingCards] = useState<Array<Flashcard>>((JSON.parse(savedFlashcards as string) as Array<Flashcard>).sort(() => Math.random() - 0.5))
 
     function submitAnswer() {
-        console.warn("Submit Triggered")
-        // remove first element
-        remainingCards.splice(0, 1)
-        setUpdates(updates + 1)
-        console.log(remainingCards)
         // Check the answer
         const answer = (document.getElementById("answer") as unknown as HTMLInputElement).value as unknown as string
         console.log("comparing: " + answer + " vs " + remainingCards[0].ans)
         if(answer == remainingCards[0].ans) {
             setGoodBois(goodBois + 1)
         }
-
+        console.warn("Submit Triggered")
+        // remove first element
+        remainingCards.splice(0, 1)
+        setUpdates(updates + 1)
         // check if game ended
+        if(remainingCards.length == 0) {
+            const calculatedResult = goodBois * 100 / (courseLength)
+            console.log(goodBois + " * 100 / " + courseLength + "=" + calculatedResult)
+            localStorage.setItem("lastScore", calculatedResult.toString())
+        }
     }
 
     useEffect(() => {
-        
+        console.log(remainingCards)
     }, [updates])
 
     return(

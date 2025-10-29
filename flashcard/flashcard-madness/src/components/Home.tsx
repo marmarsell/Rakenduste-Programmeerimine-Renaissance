@@ -1,6 +1,8 @@
 
 function Home() {
 
+    const lastScore = localStorage.getItem("lastScore")
+
     function pressPlay() {
         window.location.replace("/flashcards/play");
     }
@@ -15,7 +17,7 @@ function Home() {
                 <h2>FLASHCARD MADNESS</h2>
                 <button onClick={() => pressEdit()}>✎ Edit</button>
             </div>
-            <div>this is a home page</div>
+            <div>this is a home page, oh and your personal best is {lastScore}%</div>
             <button onClick={() => pressPlay()}>〘 PLAY 〙</button>
         </>
     )
